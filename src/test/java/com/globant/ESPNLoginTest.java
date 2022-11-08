@@ -11,8 +11,10 @@ public class ESPNLoginTest extends AppTest{
         log.info("En el popup de Login ingresar userName");
         log.info("En el popup de Login ingresar password");
         log.info("Dar click en Login");
-        //validaciones solo se hacen en test
-        log.info("Verificar si el login fue satisfactorio");
-        System.out.println("LOGIN SUCCESS");
+        log.info("Pararse en el avatar del navBar");
+        log.info("Verificar si en la columna izquierda del pop up aparece !Bienvenido userName!");
+        log.info("Verificar si en la columna izquierda del pop up esta la opcion de logout");
+        log.info("Verificar si en la columna izquierda del pop up esta la opcion de ESP profile");
+        System.out.println();
     }
 }

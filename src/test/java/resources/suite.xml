@@ -1,6 +1,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="ESPN Test suite" verbose="1">
+    <listeners>
+        <listener class-name="com.globant.ESPNWebListeners"></listener>
+    </listeners>
     <test name="ESPNQA login test">
         <classes>
             <class name="com.globant.ESPNLoginTest"/>

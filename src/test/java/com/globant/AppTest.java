@@ -17,21 +17,21 @@ public class AppTest {
     @BeforeTest
     public void openBrowser(){
         log.info("Abrir el/los navegadores");
-        log.info("Limpiar cookies");
+        log.info("Comprobar que el navegador se abrio");
         System.out.println();
     }
 
     @BeforeClass
     public void openWebPage(){
         log.info("Ingresar a la pagina web https://www.espnqa.com/?_adbock=true&src=com");
-        log.info("Validar que estoy en la pagina");
-        //validacion
+        log.info("Comprobar que estoy en la pagina https://www.espnqa.com/?_adbock=true&src=com");
         System.out.println();
     }
 
     @AfterTest
     public void closeBrowser(){
         log.info("Cerrar el/los navegadores");
+        log.info("Comprobar que el navegador se cerro");
         System.out.println();
     }
 }
