@@ -18,6 +18,17 @@ public class ESPNDeactivateUserTest extends AppTest{
         System.out.println();
     }
 
+    public void verifyUserExists(){
+        log.info("Pararse en el avatar del navBar");
+        log.info("Dar click en Login");
+        log.info("En el popup de Login ingresar userName");
+        log.info("En el popup de Login ingresar password");
+        log.info("Dar click en Login");
+        log.info("Verificar que se abra un popup que tenga como titulo ' Account Deactivated '");
+        System.out.println();
+
+    }
+
     @Test
     public void deactivateUser(){
         log.info("Pararse en el avatar del navBar");
@@ -26,7 +37,7 @@ public class ESPNDeactivateUserTest extends AppTest{
         log.info("Dar click en Delete Account");
         log.info("Dar click en el boton 'Yes, delete this account'");
         log.info("Dar click en 'OK'");
-        login();
+        verifyUserExists();
         System.out.println();
     }
 }

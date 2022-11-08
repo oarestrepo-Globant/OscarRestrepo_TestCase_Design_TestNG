@@ -24,7 +24,6 @@ public class ESPNLogutTest extends AppTest {
         log.info("Dar click en Logout");
         log.info("Pararse en el avatar del navBar");
         log.info("Verificar si en la columna izquierda del pop up esta la opcion de login");
-        log.info("Verificar si en la columna izquierda del pop up NO este la opcion de ESP profile");
-        System.out.println("");
+        System.out.println();
     }
 }
