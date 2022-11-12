@@ -1,4 +1,7 @@
 package org.espn.utils;
 
-public class Listenner {
+import org.testng.ITestListener;
+
+public class Listenner implements ITestListener {
+
 }
