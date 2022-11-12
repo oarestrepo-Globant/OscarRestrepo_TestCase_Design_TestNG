@@ -2,21 +2,11 @@
 
 <suite name="ESPN Test suite" verbose="1">
     <listeners>
-        <listener class-name="com.globant.ESPNWebListeners"></listener>
     </listeners>
-    <test name="ESPNQA login test">
+   <!-- <test name="ESPNQA login test">
         <classes>
-            <class name="com.globant.ESPNLoginTest"/>
+            <class name="org.espn.tests.ESPNLoginTest"/>
         </classes>
-    </test>
-    <test name="ESPNQA logout test">
-        <classes>
-            <class name="com.globant.ESPNLogutTest"/>
-        </classes>
-    </test>
-        <test name="ESPNQA deactivate user test">
-            <classes>
-                <class name="com.globant.ESPNDeactivateUserTest"/>
-            </classes>
-        </test>
+    </test>-->
+
 </suite>
