@@ -1,12 +1,11 @@
 package org.espn.reporting;
 
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Reporter {
-    public Reporter(){}
+public class Logger {
+    public Logger(){}
 
-    private static Logger getLogger(){return LoggerFactory.getLogger(Reporter.class);
+    private static org.slf4j.Logger getLogger(){return LoggerFactory.getLogger(Logger.class);
     }
 
     public static void info(String text){

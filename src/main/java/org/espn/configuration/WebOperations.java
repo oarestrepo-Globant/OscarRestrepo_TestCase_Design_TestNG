@@ -2,6 +2,7 @@ package org.espn.configuration;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -13,10 +14,12 @@ import static org.openqa.selenium.support.PageFactory.initElements;
 public class WebOperations {
     private final WebDriver driver;
     private final WebDriverWait wait;
+    private final Actions action;
 
     public WebOperations(WebDriver driver){
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(5L));
+        this.action = new Actions(driver);
         initElements(driver, this);
     }
 
@@ -24,13 +27,12 @@ public class WebOperations {
         return driver;
     }
 
-    public void waitForClickable(WebElement element) {
-        wait.until(ExpectedConditions.elementToBeClickable(element));
+    protected Actions getAction() {
+        return action;
     }
 
-    public void clickElement(WebElement element){
-        waitForClickable(element);
-        element.click();
+    public void waitForClickable(WebElement element) {
+        wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
     public void typeOnInput(WebElement element, String text){
@@ -43,6 +45,20 @@ public class WebOperations {
 
     public void waitForVisibility(List<WebElement> elements){
         wait.until(ExpectedConditions.visibilityOfAllElements(elements));
+    }
+
+    public void clickElement(WebElement element){
+        waitForVisibility(element);
+        waitForClickable(element);
+        element.click();
+    }
+
+    public void placeMouseToElement(WebElement element){
+        action.moveToElement(element).perform();
+    }
+
+    public void changeToIframe(String frameToChange){
+        getDriver().switchTo().frame(frameToChange);
     }
 
 }

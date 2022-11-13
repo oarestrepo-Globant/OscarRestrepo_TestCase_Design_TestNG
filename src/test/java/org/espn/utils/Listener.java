@@ -1,17 +1,17 @@
 package org.espn.utils;
 
-import org.espn.reporting.Reporter;
+import org.espn.reporting.Logger;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 public class Listener implements ITestListener {
     @Override
     public void onTestSuccess(ITestResult result){
-        Reporter.info("Test: " + result.getName() + " [PASSED]");
+        Logger.info("Test: " + result.getName() + " [PASSED]");
     }
 
     @Override
     public void onTestFailure(ITestResult result){
-        Reporter.error("Test: " + result + " [FAILED]");
+        Logger.error("Test: " + result + " [FAILED]");
     }
 }
