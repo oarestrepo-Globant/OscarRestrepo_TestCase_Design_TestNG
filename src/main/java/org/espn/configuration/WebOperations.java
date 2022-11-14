@@ -35,10 +35,6 @@ public class WebOperations {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    public void typeOnInput(WebElement element, String text){
-        element.sendKeys(text);
-    }
-
     public void waitForVisibility(WebElement element){
         wait.until(ExpectedConditions.visibilityOf(element));
     }
@@ -53,12 +49,18 @@ public class WebOperations {
         element.click();
     }
 
+    public void typeOnPlaceholder(WebElement element, String text){
+        waitForVisibility(element);
+        placeMouseToElement(element);
+        element.sendKeys(text);
+    }
+
     public void placeMouseToElement(WebElement element){
+        waitForVisibility(element);
         action.moveToElement(element).perform();
     }
 
     public void changeToIframe(String frameToChange){
         getDriver().switchTo().frame(frameToChange);
     }
-
 }

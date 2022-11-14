@@ -30,8 +30,6 @@ public class BaseTest  {
         driver.closeBrowser();
     }*/
 
-
-
     protected <T> void checkThat(String description, T actualValue, Matcher<? super T> expectedValue) {
         Logger.info(format("Checking that " + description.toLowerCase() + " [Expectation: %s]", expectedValue));
         try {

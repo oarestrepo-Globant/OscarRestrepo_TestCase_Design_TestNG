@@ -1,42 +1,27 @@
 package org.espn.tests;
 
-import org.espn.pages.BasePage;
-import org.espn.pages.LoginPage;
-import org.espn.pages.UserPage;
+import org.espn.pages.HomePage;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.Matchers.is;
 
 public class LoginTest extends BaseTest{
+    private final String userName = "Oscar!";
     @Test
     public void login(){
-        // Estoy instanciando una pagina home.
-        BasePage home = new BasePage(driver.getDriver());
-        // vaya al userIcon y ponga el mouse sobre el
+        HomePage home = new HomePage(driver.getDriver());
         home.placeMouseOnUserIcon();
-
-        //      SE ABRE UNA NUEVA PAGINA      //
-        // Instanciar userPage
-        UserPage userPage = new UserPage(driver.getDriver());
-        // Click en login button
-        userPage.clickLoginUserButton();
-
-        //      SE ABRE iFrame Login      //
-        // Instanciar nueva pagina
-        LoginPage loginPage = new LoginPage(driver.getDriver());
-
-        checkThat("Modal is present",loginPage.isModalLoginDisplayed(), is(true));
-
-
+        home.clickLoginUserButton();
+        checkThat("Modal is present",home.isModalLoginDisplayed(), is(true));
         // SWITCH IFRAME LOGIN //
-        loginPage.changeToLoginIframe();
-        //loginPage.isEspnLogoDisplayed();
-        checkThat("ESPN Logo is present",loginPage.isEspnLogoDisplayed(), is(true));
-        checkThat("Signup button is present",loginPage.isSignUpButtonDisplayed(), is(true));
-        checkThat("Login button is present", loginPage.checkLoginIsDisplayed(), is(true));
+        home.changeToLoginIframe();
+        checkThat("ESPN Logo is present",home.isEspnLogoDisplayed(), is(true));
+        checkThat("Signup button is present",home.isSignUpButtonDisplayed(), is(true));
+        checkThat("Login button is present", home.checkLoginIsDisplayed(), is(true));
 
-
-
-
+        //LOGUEARME
+        home.enterLoginCredentials();
+        checkThat("Succes login", home.getUsernameLogged(), is(userName));
+        home.clickWatchButton();
     }
 }
