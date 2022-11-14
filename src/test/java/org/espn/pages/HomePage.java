@@ -59,9 +59,9 @@ public class HomePage extends BasePage{
         super.clickElement(loginUserButton);
     }
 
-    public void enterLoginCredentials(){
-        super.typeOnPlaceholder(placeHolderUserName, "pruebita@hotmail.com");
-        super.typeOnPlaceholder(placeHolderPassword, "prueba123");
+    public void enterLoginCredentials(String email, String password){
+        super.typeOnPlaceholder(placeHolderUserName, email);
+        super.typeOnPlaceholder(placeHolderPassword, password);
         super.clickElement(loginButton);
     }
 

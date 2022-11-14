@@ -6,6 +6,7 @@ import org.espn.reporting.Logger;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 
 import static java.lang.String.format;
@@ -13,7 +14,10 @@ import static java.lang.String.format;
 public class BaseTest  {
     protected Driver driver;
     private HomePage home;
-
+    @DataProvider(name = "credentialsToLogin")
+    public Object[][] getUsersLoginData() {
+        return new Object[][]{{"pruebita@hotmail.com", "prueba123"}};
+    }
     @Parameters({"browser", "url"})
     @BeforeTest
     public void testSetup(String browser, String url) {
