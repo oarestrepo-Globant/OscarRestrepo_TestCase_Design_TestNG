@@ -12,11 +12,11 @@ import org.testng.annotations.Parameters;
 import static java.lang.String.format;
 
 public class BaseTest  {
-    protected Driver driver;
-    private HomePage home;
+    private Driver driver;
+    protected HomePage home;
     @DataProvider(name = "credentialsToLogin")
     public Object[][] getUsersLoginData() {
-        return new Object[][]{{"pruebita@hotmail.com", "prueba123"}};
+        return new Object[][]{{"radar35704@klblogs.com", "prueba123"}};
     }
     @Parameters({"browser", "url"})
     @BeforeTest
@@ -29,7 +29,8 @@ public class BaseTest  {
         driver.maximizeWindow();
         home = new HomePage(driver.getDriver());
     }
-    /*@AfterTest
+
+   /* @AfterTest
     public void tearDown(){
         driver.closeBrowser();
     }*/

@@ -23,10 +23,14 @@ public class HomePage extends BasePage{
     private WebElement placeHolderUserName;
     @FindBy(css="input#InputPassword")
     private WebElement placeHolderPassword;
-    @FindBy(css=" li.user > div > div > ul.account-management > li.display-user > span")
+    @FindBy(css="li.user > div > div > ul.account-management > li.display-user > span")
     private WebElement userNameInNavText;
-    @FindBy(css="a[href='http://www.espn.com/watch/'] > span > span.link-text")
+
+    @FindBy(css="li.pillar.watch > a")
     private WebElement watchButton;
+
+    @FindBy(css="ul > li.user > div > div > ul.account-management > li:nth-child(9) > a")
+    private WebElement logoutButton;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -70,8 +74,17 @@ public class HomePage extends BasePage{
         return userNameInNavText.getText();
     }
 
-    public void clickWatchButton(){
+    public WatchPage clickWatchButton(){
         super.clickElement(watchButton);
-        new WatchPage(getDriver());
+        return new WatchPage(super.getDriver());
+    }
+
+    public void clickLogoutButton() throws InterruptedException {
+        super.clickElement(logoutButton);
+
+    }
+
+    public boolean comprobarLogut(){
+        return userNameInNavText.isDisplayed();
     }
 }

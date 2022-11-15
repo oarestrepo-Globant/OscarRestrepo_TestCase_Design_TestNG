@@ -27,7 +27,7 @@ public class Driver {
   }
 
   public void getUrl(){
-      driver.get("https://www.espnqa.com/?src=com&_adblock=true&espn=cloud ");
+      driver.get("https://www.espnqa.com/?src=com&_adblock=true&espn=cloud");
   }
 
   public void maximizeWindow(){

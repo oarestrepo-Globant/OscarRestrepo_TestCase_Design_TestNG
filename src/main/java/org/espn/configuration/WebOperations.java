@@ -14,11 +14,11 @@ import static org.openqa.selenium.support.PageFactory.initElements;
 public class WebOperations {
     private final WebDriver driver;
     private final WebDriverWait wait;
-    private final Actions action;
+    protected final Actions action;
 
     public WebOperations(WebDriver driver){
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(5L));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10L));
         this.action = new Actions(driver);
         initElements(driver, this);
     }
@@ -61,6 +61,10 @@ public class WebOperations {
     }
 
     public void changeToIframe(String frameToChange){
-        getDriver().switchTo().frame(frameToChange);
+        driver.switchTo().frame(frameToChange);
+    }
+
+    public void backToPreviousPage(){
+        driver.navigate().back();
     }
 }
