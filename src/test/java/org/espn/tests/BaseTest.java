@@ -5,6 +5,7 @@ import org.espn.pages.HomePage;
 import org.espn.reporting.Logger;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
@@ -14,10 +15,14 @@ import static java.lang.String.format;
 public class BaseTest  {
     protected Driver driver;
     protected HomePage home;
+
     @DataProvider(name = "credentialsToLogin")
     public Object[][] getUsersLoginData() {
-        return new Object[][]{{"19@a.com", "prueba123"}};
+        //usar16
+        return new Object[][]{{"2@z.com", "prueba123"}};
     }
+
+
     @Parameters({"browser", "url"})
     @BeforeClass
     public void testSetup(String browser, String url) {
@@ -37,10 +42,10 @@ public class BaseTest  {
         }
     }*/
 
-  /*  @AfterClass
+    @AfterClass
     public void tearDown(){
         driver.closeBrowser();
-    }*/
+    }
 
     protected <T> void checkThat(String description, T actualValue, Matcher<? super T> expectedValue) {
         Logger.info(format("Checking that " + description.toLowerCase() + " [Expectation: %s]", expectedValue));
@@ -51,11 +56,4 @@ public class BaseTest  {
         }
     }
 
-    public Driver getDriver() {
-        return driver;
-    }
-
-    protected void deleteCookies(){
-        getDriver().deleteCookies();
-    }
 }

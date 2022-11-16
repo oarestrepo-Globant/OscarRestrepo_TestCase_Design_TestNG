@@ -103,7 +103,7 @@ public class HomePage extends BasePage{
     }
 
     public void clickLoginUserButton(){
-        //changeToLoginIframe();
+
         super.clickElement(loginUserButton);
     }
 
@@ -128,7 +128,6 @@ public class HomePage extends BasePage{
         super.clickElement(logoutButton);
     }
 
-    //CAMBIAR NOMBRE
     public boolean checkUserIsLoggedOut() {
         super.refreshBrowser();
         super.placeMouseToElement(userIcon);
@@ -137,22 +136,16 @@ public class HomePage extends BasePage{
 
     public boolean login(String email, String password) {
         placeMouseOnUserIcon();
-        //incluir el change iframe dentro del clicklogin y probar
         clickLoginUserButton();
         changeToLoginIframe();
-       enterLoginCredentials(email, password);
-       return true;
-        //clickLoginUserButton();
+        enterLoginCredentials(email, password);
+        return true;
     }
 
     public void logout(){
         placeMouseOnUserIcon();
         clickLogoutButton();
         checkUserIsLoggedOut();
-    }
-
-    public void changeToBannerIframe(){
-        super.changeToIframe(iframeBanner.getAttribute("src"));
     }
 
     public void waitForAreYouSureText(){
@@ -164,28 +157,39 @@ public class HomePage extends BasePage{
         super.clickElement(espnProfileButton);
         changeToLoginIframe();
         super.waitForVisibility(deleteAccountTextButton);
-
-        //Scroll form
-        super.scrollDownPage(form);
+        super.scrollDownPage();
         super.placeMouseToElement(deleteAccountTextButton);
         super.clickElement(deleteAccountTextButton);
 
         waitForAreYouSureText();
         super.waitForText(submitButtonFromLoginAndLogutIframe, "Yes, delete this account");
+
         super.clickElement(submitButtonFromLoginAndLogutIframe);
         super.waitForText(submitButtonFromLoginAndLogutIframe,"OK" );
         super.clickElement(submitButtonFromLoginAndLogutIframe);
+    }
 
-        //verificar que el iframe tenga titulo Find Your Account
-        super.waitForText(areYouSureText, "Account Deactivated");
+    public boolean isAccountDeactivated()  {
+        String text = "";
+        String a = "Account Deactivated";
+        String b = "Find Your Account";
+
+        super.placeMouseToElement(areYouSureText);
+        waitForVisibility(areYouSureText);
+        text = areYouSureText.getText();
+
+        return text.contains(a) || text.contains(b);
     }
-    public boolean isAccountDeactivated(){
-        return submitButtonFromLoginAndLogutIframe.isDisplayed();
-    }
-    public void confirm(){
-        super.waitForText(areYouSureText, "Find Your Account");
-        super.waitForText(areYouSureText, "Account Deactivated");
-    }
+    /*public String isAccountDeactivate(){
+        String text = "";
+        String a = "Account Deactivated";
+        String b = "Find Your Account";
+
+        super.placeMouseToElement(areYouSureText);
+        waitForVisibility(areYouSureText);
+        text = areYouSureText.getText();
+        return text;
+    }*/
    /* public boolean isPromoBannerContainerDisplayed(){
         promoBannerContainer.isDisplayed();
         return false;

@@ -1,7 +1,8 @@
 package org.espn.tests;
 
-import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
+
+import static org.hamcrest.Matchers.is;
 
 public class DeactivateAccountTest extends BaseTest{
 
@@ -10,10 +11,9 @@ public class DeactivateAccountTest extends BaseTest{
         home.login(email, password);
         home.deactivate();
         home.login(email, password);
-        checkThat("account was deactivated successfully",home.isAccountDeactivated(), Matchers.is(true) );
 
+        //checkThat("VERIFICAR", home.isAccountDeactivate(), is("m"));
 
-       /* home.logout();
-        checkThat("Welcome message has no username specified", home.getListOfUserNameInNavText(), is(true));*/
+        checkThat("account was deactivated successfully",home.isAccountDeactivated(),is( true) );
     }
 }

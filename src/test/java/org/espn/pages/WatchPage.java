@@ -1,13 +1,14 @@
 package org.espn.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WatchPage extends BasePage {
-    //Vista que contiene los caruseles => #fittPageContainer > section > div:nth-child()
     @FindBy(css="#fittPageContainer > section")
     private List<WebElement> carouselContainersList;
 
@@ -18,10 +19,10 @@ public class WatchPage extends BasePage {
     private WebElement secondCardOfFirstCarousel;
 
     @FindBy(css = ".lightbox__closebtn")
-    //.icon--color > use
-    //.lightbox__closebtn
     private WebElement xButtonFromSupplierModal;
 
+    @FindBy(css= "div.Carousel__Wrapper--canScrollRight li")
+    private List<WebElement> listOfCardsFromFirstCarousel;
 
     public WatchPage(WebDriver driver) {
         super(driver);
@@ -41,6 +42,7 @@ public class WatchPage extends BasePage {
         super.waitForVisibility(xButtonFromSupplierModal);
         return xButtonFromSupplierModal.isDisplayed();
     }
+
     public void clickXButtonFromSupplierModal(){
         super.clickElement(xButtonFromSupplierModal);
     }
@@ -50,4 +52,20 @@ public class WatchPage extends BasePage {
         return new HomePage(getDriver());
     }
 
+    public boolean isAllCardsFromCarousel(){
+        List <WebElement> cardsWithTitleList = new ArrayList<>();
+        List<WebElement> cardsWithSrcDescriptionList = new ArrayList<>();
+
+        listOfCardsFromFirstCarousel.forEach(element ->{
+            cardsWithTitleList.add(element.findElement(By.cssSelector("h2.WatchTile__Title")));
+        });
+
+        listOfCardsFromFirstCarousel.forEach(element ->{
+            cardsWithSrcDescriptionList.add(element.findElement(By.cssSelector("div.WatchTile__Meta")));
+        });
+
+        return cardsWithTitleList.size() == listOfCardsFromFirstCarousel.size() || cardsWithSrcDescriptionList.size() == listOfCardsFromFirstCarousel.size();
+
+    }
 }
+

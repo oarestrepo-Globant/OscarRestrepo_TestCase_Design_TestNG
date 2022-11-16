@@ -1,6 +1,5 @@
 package org.espn.configuration;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -26,10 +25,6 @@ public class WebOperations {
 
     protected WebDriver getDriver() {
         return driver;
-    }
-
-    protected Actions getAction() {
-        return action;
     }
 
     public void waitForClickable(WebElement element) {
@@ -72,19 +67,17 @@ public class WebOperations {
     public void refreshBrowser(){
         driver.navigate().refresh();
     }
-    public void waitFor(String locator){
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(locator)));
-    }
 
-    public void scrollDownPage(WebElement element){
-        new Actions(driver)
+    public void scrollDownPage(){
+        action
                 .scrollByAmount(0, 1000)
                 .perform();
     }
 
-    public void waitForText(WebElement element, String text){
-        wait.until(ExpectedConditions.textToBePresentInElement(element, text));
+    public boolean waitForText(WebElement element, String text){
+      return  wait.until(ExpectedConditions.textToBePresentInElement(element, text));
     }
+
 }
 
 

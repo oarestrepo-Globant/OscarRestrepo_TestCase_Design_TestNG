@@ -18,13 +18,14 @@ public class LoginTest extends BaseTest{
         checkThat("Signup button is present",home.isSignUpButtonDisplayed(), is(true));
         checkThat("Login button is present", home.checkLoginIsDisplayed(), is(true));
         home.enterLoginCredentials(email, password);
-        checkThat("Succes login", home.getUsernameLogged(), is(userName));
+        checkThat("Success login", home.getUsernameLogged(), is(userName));
     }
 
    @Test
-   public void watchPage(){
+   public void validateWatchPageAndLogout(){
        WatchPage watchPage = home.clickWatchButton();
        checkThat("At least one carousel is present in watchPage", watchPage.isCarouselContainerAndContainersDisplayed(), is(true));
+       checkThat("Each card has a title and a src description", watchPage.isAllCardsFromCarousel(), is(true));
        checkThat("'X' button to close is present on the second card in the first carousel", watchPage.isXButtonFromSupplierModalPresent(), is(true));
        watchPage.clickXButtonFromSupplierModal();
        watchPage.backToHomePage();
