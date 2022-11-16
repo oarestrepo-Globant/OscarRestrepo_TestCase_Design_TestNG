@@ -12,9 +12,6 @@ public class WatchPage extends BasePage {
     @FindBy(css="#fittPageContainer > section")
     private List<WebElement> carouselContainersList;
 
-    @FindBy(css="#fittPageContainer > section > div:nth-child(1) > section > div.Carousel__Wrapper.relative.Carousel__Wrapper--canScrollRight > div > div > ul")
-    private WebElement carousel1;
-
     @FindBy(css="#fittPageContainer > section > div:nth-child(1) > section > div.Carousel__Wrapper.relative.Carousel__Wrapper--canScrollRight > div > div > ul > li:nth-child(2) > a")
     private WebElement secondCardOfFirstCarousel;
 

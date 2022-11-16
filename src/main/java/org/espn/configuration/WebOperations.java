@@ -77,12 +77,4 @@ public class WebOperations {
     public boolean waitForText(WebElement element, String text){
       return  wait.until(ExpectedConditions.textToBePresentInElement(element, text));
     }
-
 }
-
-
-/*
-    public void backToDefaultContext(){
-        driver.switchTo().defaultContent();
-    }
-}*/

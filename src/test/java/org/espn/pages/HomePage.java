@@ -37,9 +37,6 @@ public class HomePage extends BasePage{
     @FindBy(css="ul > li.user > div > div > ul.account-management > li:nth-child(9) > a")
     private WebElement logoutButton;
 
-    @FindBy(css = ".display-user span")
-    private WebElement userText;
-
     @FindBy(css="ul .account-management >li > a[tref='/members/v3_1/modifyAccount']")
     private WebElement espnProfileButton;
 
@@ -52,28 +49,11 @@ public class HomePage extends BasePage{
     @FindBy(id="#BtnSubmit")
     private WebElement okButtonFromDeleteAccount;
 
-    @FindBy(xpath="html/body/div[4]/iframe")
-    //".promo-banner-container iframe"
-    //
-    private WebElement iframeBanner;
-
-    @FindBy(css ="div.PromoBanner__CloseBtn")
-    private WebElement closeButtonPromoBannerContainer;
-
-    @FindBy(className="promo-banner-container")
-    private WebElement promoBannerContainer;
-
-    @FindBy(css="div .form-section")
-    private WebElement form;
-
     @FindBy(css=".form-section > #BtnSubmit")
     private WebElement submitButtonFromLoginAndLogutIframe;
 
     @FindBy(css="#Title > span")
     private WebElement areYouSureText;
-
-    @FindBy(css="#OtpInputLoginValue-error > a")
-    private WebElement createAccountTextInFindYourAccount;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -83,6 +63,7 @@ public class HomePage extends BasePage{
         super.placeMouseToElement(userIcon);
     }
     public boolean isModalLoginDisplayed(){
+        waitForVisibility(loginUserIFrame);
         return loginUserIFrame.isDisplayed();
     }
 
@@ -111,7 +92,6 @@ public class HomePage extends BasePage{
         super.typeOnPlaceholder(placeHolderUserName, email);
         super.typeOnPlaceholder(placeHolderPassword, password);
         super.clickElement(loginButton);
-        //getDriver().switchTo().defaultContent();
     }
 
     public String getUsernameLogged() {
@@ -180,21 +160,4 @@ public class HomePage extends BasePage{
 
         return text.contains(a) || text.contains(b);
     }
-    /*public String isAccountDeactivate(){
-        String text = "";
-        String a = "Account Deactivated";
-        String b = "Find Your Account";
-
-        super.placeMouseToElement(areYouSureText);
-        waitForVisibility(areYouSureText);
-        text = areYouSureText.getText();
-        return text;
-    }*/
-   /* public boolean isPromoBannerContainerDisplayed(){
-        promoBannerContainer.isDisplayed();
-        return false;
-    }
-    public void closeBannerContainer(){
-        clickElement(closeButtonPromoBannerContainer);;
-    }*/
 }

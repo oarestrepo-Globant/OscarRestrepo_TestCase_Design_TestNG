@@ -18,10 +18,8 @@ public class BaseTest  {
 
     @DataProvider(name = "credentialsToLogin")
     public Object[][] getUsersLoginData() {
-        //usar16
-        return new Object[][]{{"2@z.com", "prueba123"}};
+        return new Object[][]{{"oscar@espn.com", "prueba123"}};
     }
-
 
     @Parameters({"browser", "url"})
     @BeforeClass
@@ -34,13 +32,6 @@ public class BaseTest  {
         driver.maximizeWindow();
         home = new HomePage(driver.getDriver());
     }
-
-   /* @BeforeMethod
-    public void closeBottomBanner(){
-        if (home.isPromoBannerContainerDisplayed()) {
-            home.closeBannerContainer();
-        }
-    }*/
 
     @AfterClass
     public void tearDown(){
@@ -55,5 +46,4 @@ public class BaseTest  {
             Logger.error(format("Assertion Error: [%s]", e.getMessage().replaceAll("\n", "")));
         }
     }
-
 }
