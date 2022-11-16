@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class HomePage extends BasePage{
     @FindBy(id="global-viewport")
     private WebElement homePageView;
@@ -26,11 +28,23 @@ public class HomePage extends BasePage{
     @FindBy(css="li.user > div > div > ul.account-management > li.display-user > span")
     private WebElement userNameInNavText;
 
+    @FindBy(css="li.user > div > div > ul.account-management > li.display-user > span")
+    private List<WebElement> userNameInNavTextList;
+
     @FindBy(css="li.pillar.watch > a")
     private WebElement watchButton;
 
     @FindBy(css="ul > li.user > div > div > ul.account-management > li:nth-child(9) > a")
     private WebElement logoutButton;
+
+    @FindBy(css = ".display-user span")
+    private WebElement userText;
+
+    /*@FindBy(className="promo-banner-container")
+    private WebElement promoBannerContainer;
+
+    @FindBy(css ="div.PromoBanner__CloseBtn > svg > use")
+    private WebElement closeButtonPromoBannerContainer;*/
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -38,10 +52,6 @@ public class HomePage extends BasePage{
 
     public void placeMouseOnUserIcon(){
         super.placeMouseToElement(userIcon);
-    }
-
-    public void changeToLoginIframe(){
-        super.changeToIframe(loginUserIFrame.getAttribute("id"));
     }
     public boolean isModalLoginDisplayed(){
         return loginUserIFrame.isDisplayed();
@@ -59,7 +69,12 @@ public class HomePage extends BasePage{
         return loginButton.isDisplayed();
     }
 
+    public void changeToLoginIframe(){
+        super.changeToIframe(loginUserIFrame.getAttribute("id"));
+    }
+
     public void clickLoginUserButton(){
+        //changeToLoginIframe();
         super.clickElement(loginUserButton);
     }
 
@@ -67,9 +82,10 @@ public class HomePage extends BasePage{
         super.typeOnPlaceholder(placeHolderUserName, email);
         super.typeOnPlaceholder(placeHolderPassword, password);
         super.clickElement(loginButton);
+        //getDriver().switchTo().defaultContent();
     }
 
-    public String getUsernameLogged(){
+    public String getUsernameLogged() {
         super.placeMouseToElement(userIcon);
         return userNameInNavText.getText();
     }
@@ -79,12 +95,37 @@ public class HomePage extends BasePage{
         return new WatchPage(super.getDriver());
     }
 
-    public void clickLogoutButton() throws InterruptedException {
+    public void clickLogoutButton() {
         super.clickElement(logoutButton);
-
     }
 
-    public boolean comprobarLogut(){
-        return userNameInNavText.isDisplayed();
+    //CAMBIAR NOMBRE
+    public boolean getListOfUserNameInNavText() {
+        super.refreshBrowser();
+        super.placeMouseToElement(userIcon);
+        return userNameInNavTextList.size() > 0; //mayor a cer entonces true => login
     }
+
+    public void login(String email, String password) {
+        placeMouseOnUserIcon();
+        //incluir el change iframe dentro del clicklogin y probar
+        clickLoginUserButton();
+        changeToLoginIframe();
+        enterLoginCredentials(email, password);
+        //clickLoginUserButton();
+    }
+
+    public void logout(){
+        placeMouseOnUserIcon();
+        clickLogoutButton();
+        getListOfUserNameInNavText();
+    }
+
+   /* public boolean isPromoBannerContainerDisplayed(){
+        promoBannerContainer.isDisplayed();
+        return false;
+    }
+    public void closeBannerContainer(){
+        clickElement(closeButtonPromoBannerContainer);;
+    }*/
 }

@@ -12,11 +12,11 @@ import org.testng.annotations.Parameters;
 import static java.lang.String.format;
 
 public class BaseTest  {
-    private Driver driver;
+    protected Driver driver;
     protected HomePage home;
     @DataProvider(name = "credentialsToLogin")
     public Object[][] getUsersLoginData() {
-        return new Object[][]{{"radar35704@klblogs.com", "prueba123"}};
+        return new Object[][]{{"elmail@jolmail.com", "prueba123"}};
     }
     @Parameters({"browser", "url"})
     @BeforeTest
@@ -30,6 +30,13 @@ public class BaseTest  {
         home = new HomePage(driver.getDriver());
     }
 
+   /* @BeforeMethod
+    public void closeBottomBanner(){
+        if (home.isPromoBannerContainerDisplayed()) {
+            home.closeBannerContainer();
+        }
+    }*/
+
    /* @AfterTest
     public void tearDown(){
         driver.closeBrowser();
@@ -42,5 +49,13 @@ public class BaseTest  {
         } catch (AssertionError e) {
             Logger.error(format("Assertion Error: [%s]", e.getMessage().replaceAll("\n", "")));
         }
+    }
+
+    public Driver getDriver() {
+        return driver;
+    }
+
+    protected void deleteCookies(){
+        getDriver().deleteCookies();
     }
 }

@@ -17,7 +17,9 @@ public class WatchPage extends BasePage {
     @FindBy(css="#fittPageContainer > section > div:nth-child(1) > section > div.Carousel__Wrapper.relative.Carousel__Wrapper--canScrollRight > div > div > ul > li:nth-child(2) > a")
     private WebElement secondCardOfFirstCarousel;
 
-    @FindBy(css = ".icon--color > use")
+    @FindBy(css = ".lightbox__closebtn")
+    //.icon--color > use
+    //.lightbox__closebtn
     private WebElement xButtonFromSupplierModal;
 
 
@@ -42,6 +44,7 @@ public class WatchPage extends BasePage {
     public void clickXButtonFromSupplierModal(){
         super.clickElement(xButtonFromSupplierModal);
     }
+
     public void backToHomePage(){
         super.backToPreviousPage();
     }

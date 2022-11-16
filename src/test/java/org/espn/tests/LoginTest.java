@@ -6,10 +6,10 @@ import org.testng.annotations.Test;
 import static org.hamcrest.Matchers.is;
 
 public class LoginTest extends BaseTest{
-    private final String userName = "Oscar!";
+   private final String userName = "Oscar!";
 
     @Test(dataProvider = "credentialsToLogin")
-    public void login(String email, String password) throws InterruptedException {
+    public void doingLogin(String email, String password){
         home.placeMouseOnUserIcon();
         home.clickLoginUserButton();
         checkThat("Modal is present",home.isModalLoginDisplayed(), is(true));
@@ -23,17 +23,17 @@ public class LoginTest extends BaseTest{
 
         // watch //
        checkThat("At least one carousel is present in watchPage", watchPage.isCarouselContainerAndContainersDisplayed(), is(true));
-       checkThat("'X' button to close is present", watchPage.isXButtonFromSupplierModalPresent(), is(true));
+       checkThat("'X' button to close is present on the second card in the first carousel", watchPage.isXButtonFromSupplierModalPresent(), is(true));
        watchPage.clickXButtonFromSupplierModal();
        watchPage.backToHomePage();
-       checkThat("'Nav text' has 'Welcome {{username}}!'", home.getUsernameLogged(), is(true));
+       checkThat("'Nav text' has 'Welcome {{username}}!'", home.getUsernameLogged(), is(userName));
        home.clickLogoutButton();
-       checkThat("the element 'Nav text' has text: 'Welcome!' without user name specified", home.comprobarLogut(), is(false));
 
+       checkThat("Welcome message has no username specified", home.getListOfUserNameInNavText(), is(false));
     }
 
-   /* @Test
-    public void watchPage(){
+   /*@Test
+   public void watchPage(){
 
     }*/
 }

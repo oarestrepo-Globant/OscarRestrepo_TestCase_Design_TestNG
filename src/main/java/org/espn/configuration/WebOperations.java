@@ -18,7 +18,7 @@ public class WebOperations {
 
     public WebOperations(WebDriver driver){
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10L));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(15L));
         this.action = new Actions(driver);
         initElements(driver, this);
     }
@@ -67,4 +67,13 @@ public class WebOperations {
     public void backToPreviousPage(){
         driver.navigate().back();
     }
+
+    public void refreshBrowser(){
+        driver.navigate().refresh();
+    }
 }
+/*
+    public void backToDefaultContext(){
+        driver.switchTo().defaultContent();
+    }
+}*/

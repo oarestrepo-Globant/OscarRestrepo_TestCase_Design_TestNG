@@ -7,10 +7,16 @@
 
     <parameter name="url" value="https://www.espnqa.com/?src=com&amp;_adblock=true&amp;espn=cloud"/>
     
-    <test name="Login test">
+    <test name="ESPN test">
         <parameter name="browser" value="chrome"/>
         <classes>
             <class name="org.espn.tests.LoginTest"/>
+        </classes>
+    </test>
+    <test name="ESPN El otro">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="org.espn.tests.LogoutTest"/>
         </classes>
     </test>
 </suite>
