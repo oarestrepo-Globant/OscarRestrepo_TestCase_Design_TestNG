@@ -5,7 +5,7 @@ import org.espn.pages.HomePage;
 import org.espn.reporting.Logger;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 
@@ -16,10 +16,10 @@ public class BaseTest  {
     protected HomePage home;
     @DataProvider(name = "credentialsToLogin")
     public Object[][] getUsersLoginData() {
-        return new Object[][]{{"elmail@jolmail.com", "prueba123"}};
+        return new Object[][]{{"19@a.com", "prueba123"}};
     }
     @Parameters({"browser", "url"})
-    @BeforeTest
+    @BeforeClass
     public void testSetup(String browser, String url) {
         driver = new Driver(browser);
         Logger.info("Deleting all cookies");
@@ -37,7 +37,7 @@ public class BaseTest  {
         }
     }*/
 
-   /* @AfterTest
+  /*  @AfterClass
     public void tearDown(){
         driver.closeBrowser();
     }*/

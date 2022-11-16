@@ -1,5 +1,6 @@
 package org.espn.configuration;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -71,7 +72,22 @@ public class WebOperations {
     public void refreshBrowser(){
         driver.navigate().refresh();
     }
+    public void waitFor(String locator){
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(locator)));
+    }
+
+    public void scrollDownPage(WebElement element){
+        new Actions(driver)
+                .scrollByAmount(0, 1000)
+                .perform();
+    }
+
+    public void waitForText(WebElement element, String text){
+        wait.until(ExpectedConditions.textToBePresentInElement(element, text));
+    }
 }
+
+
 /*
     public void backToDefaultContext(){
         driver.switchTo().defaultContent();

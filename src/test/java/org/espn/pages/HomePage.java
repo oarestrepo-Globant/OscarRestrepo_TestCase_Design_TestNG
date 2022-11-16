@@ -40,11 +40,40 @@ public class HomePage extends BasePage{
     @FindBy(css = ".display-user span")
     private WebElement userText;
 
-    /*@FindBy(className="promo-banner-container")
+    @FindBy(css="ul .account-management >li > a[tref='/members/v3_1/modifyAccount']")
+    private WebElement espnProfileButton;
+
+    @FindBy(css="a[id='AccountDeleteLink']")
+    private WebElement deleteAccountTextButton;
+
+    @FindBy(css="button#BtnSubmit")
+    private WebElement yesDeleteAccountButton;
+
+    @FindBy(id="#BtnSubmit")
+    private WebElement okButtonFromDeleteAccount;
+
+    @FindBy(xpath="html/body/div[4]/iframe")
+    //".promo-banner-container iframe"
+    //
+    private WebElement iframeBanner;
+
+    @FindBy(css ="div.PromoBanner__CloseBtn")
+    private WebElement closeButtonPromoBannerContainer;
+
+    @FindBy(className="promo-banner-container")
     private WebElement promoBannerContainer;
 
-    @FindBy(css ="div.PromoBanner__CloseBtn > svg > use")
-    private WebElement closeButtonPromoBannerContainer;*/
+    @FindBy(css="div .form-section")
+    private WebElement form;
+
+    @FindBy(css=".form-section > #BtnSubmit")
+    private WebElement submitButtonFromLoginAndLogutIframe;
+
+    @FindBy(css="#Title > span")
+    private WebElement areYouSureText;
+
+    @FindBy(css="#OtpInputLoginValue-error > a")
+    private WebElement createAccountTextInFindYourAccount;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -100,27 +129,63 @@ public class HomePage extends BasePage{
     }
 
     //CAMBIAR NOMBRE
-    public boolean getListOfUserNameInNavText() {
+    public boolean checkUserIsLoggedOut() {
         super.refreshBrowser();
         super.placeMouseToElement(userIcon);
-        return userNameInNavTextList.size() > 0; //mayor a cer entonces true => login
+        return userNameInNavTextList.size() == 0;
     }
 
-    public void login(String email, String password) {
+    public boolean login(String email, String password) {
         placeMouseOnUserIcon();
         //incluir el change iframe dentro del clicklogin y probar
         clickLoginUserButton();
         changeToLoginIframe();
-        enterLoginCredentials(email, password);
+       enterLoginCredentials(email, password);
+       return true;
         //clickLoginUserButton();
     }
 
     public void logout(){
         placeMouseOnUserIcon();
         clickLogoutButton();
-        getListOfUserNameInNavText();
+        checkUserIsLoggedOut();
     }
 
+    public void changeToBannerIframe(){
+        super.changeToIframe(iframeBanner.getAttribute("src"));
+    }
+
+    public void waitForAreYouSureText(){
+        super.waitForVisibility(areYouSureText);
+    }
+
+    public void deactivate()  {
+        placeMouseOnUserIcon();
+        super.clickElement(espnProfileButton);
+        changeToLoginIframe();
+        super.waitForVisibility(deleteAccountTextButton);
+
+        //Scroll form
+        super.scrollDownPage(form);
+        super.placeMouseToElement(deleteAccountTextButton);
+        super.clickElement(deleteAccountTextButton);
+
+        waitForAreYouSureText();
+        super.waitForText(submitButtonFromLoginAndLogutIframe, "Yes, delete this account");
+        super.clickElement(submitButtonFromLoginAndLogutIframe);
+        super.waitForText(submitButtonFromLoginAndLogutIframe,"OK" );
+        super.clickElement(submitButtonFromLoginAndLogutIframe);
+
+        //verificar que el iframe tenga titulo Find Your Account
+        super.waitForText(areYouSureText, "Account Deactivated");
+    }
+    public boolean isAccountDeactivated(){
+        return submitButtonFromLoginAndLogutIframe.isDisplayed();
+    }
+    public void confirm(){
+        super.waitForText(areYouSureText, "Find Your Account");
+        super.waitForText(areYouSureText, "Account Deactivated");
+    }
    /* public boolean isPromoBannerContainerDisplayed(){
         promoBannerContainer.isDisplayed();
         return false;

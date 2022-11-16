@@ -29,7 +29,7 @@ public class WatchPage extends BasePage {
 
     public boolean isCarouselContainerAndContainersDisplayed(){
         super.waitForVisibility(carouselContainersList);
-        return carouselContainersList.size() > 0 ? true : false;
+        return carouselContainersList.size() > 0;
     }
 
     public void clickSecondCardFromFirstCarrousel(){
@@ -45,8 +45,9 @@ public class WatchPage extends BasePage {
         super.clickElement(xButtonFromSupplierModal);
     }
 
-    public void backToHomePage(){
+    public HomePage backToHomePage(){
         super.backToPreviousPage();
+        return new HomePage(getDriver());
     }
 
 }
